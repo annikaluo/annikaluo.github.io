@@ -1,6 +1,6 @@
 ---
 title: "Un, Intended Consequences?"
-category: sustainability
+category: environmental-art
 year: 2023
 month: 3
 date: "March 2023"

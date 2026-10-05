@@ -1,6 +1,6 @@
 ---
 title: "Rose Study"
-category: fine-arts
+category: visual-arts
 year: 2019
 month: 12
 date: "December 2019"

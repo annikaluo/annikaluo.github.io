@@ -21,7 +21,7 @@ src/content/projects/rose-study/
   01.jpg ...   images used in the page
 ```
 
-The block at the top of `index.md` sets the title, category (`fashion`, `fine-arts` or `sustainability`), year, the short
+The block at the top of `index.md` sets the title, category (`fashion`, `visual-arts` or `environmental-art`), year, the short
 italic note shown in the index, and the context lines (size, materials). Below it, write the page in Markdown:
 
 - A blank line between images stacks them full width.

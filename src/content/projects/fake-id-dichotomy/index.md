@@ -1,6 +1,6 @@
 ---
 title: "Fake ID: Dichotomy"
-category: fine-arts
+category: visual-arts
 year: 2019
 month: 9
 date: "September 2019"

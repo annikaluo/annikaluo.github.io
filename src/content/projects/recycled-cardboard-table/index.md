@@ -1,6 +1,6 @@
 ---
 title: "Recycled Cardboard Table"
-category: sustainability
+category: environmental-art
 year: 2020
 month: 3
 date: "March 2020"

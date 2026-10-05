@@ -13,7 +13,7 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       subtitle: z.string().optional(),
-      category: z.enum(['fashion', 'fine-arts', 'sustainability']),
+      category: z.enum(['fashion', 'visual-arts', 'environmental-art']),
       year: z.number(),
       month: z.number().default(1),
       date: z.string(),

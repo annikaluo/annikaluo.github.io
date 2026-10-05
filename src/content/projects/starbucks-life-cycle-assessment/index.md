@@ -1,7 +1,7 @@
 ---
 title: "Starbucks Paper Cups"
 subtitle: "Life Cycle Assessment"
-category: sustainability
+category: environmental-art
 year: 2020
 month: 2
 date: "February 2020"

@@ -1,6 +1,6 @@
 ---
 title: "Infinity of Now"
-category: fine-arts
+category: visual-arts
 year: 2020
 month: 1
 date: "January 2020"

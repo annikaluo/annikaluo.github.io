@@ -1,7 +1,7 @@
 ---
 title: "DNA of Designer"
 subtitle: "Yohji Yamamoto"
-category: fine-arts
+category: visual-arts
 year: 2020
 month: 3
 date: "March 2020"

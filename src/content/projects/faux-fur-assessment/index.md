@@ -1,6 +1,6 @@
 ---
 title: "Faux Fur Assessment"
-category: sustainability
+category: environmental-art
 year: 2020
 month: 5
 date: "May 2020"
