@@ -27,7 +27,6 @@ She uses minimalist concepts and detailed workwear silhouettes, while irregular 
 ![Lookbook page 1](./01.jpg)
 
 ![Lookbook page 2](./02.jpg)
-![Lookbook page 3](./03.jpg)
 
 ![Lookbook page 4](./04.jpg)
 ![Lookbook page 5](./05.jpg)
