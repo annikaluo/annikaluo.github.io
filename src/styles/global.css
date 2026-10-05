@@ -328,6 +328,15 @@ a:focus-visible .mark,
   max-height: 92svh;
 }
 
+.prose > video {
+  display: block;
+  width: 100%;
+  max-width: 64rem;
+  height: auto;
+  margin-top: 2.2em;
+  background: var(--ink);
+}
+
 .prose > p:has(> img ~ img) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
