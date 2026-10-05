@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // One folder per project: src/content/projects/<slug>/index.md plus its images.
+// Folders in src/content/archive/ are kept in the repo but never loaded, so nothing in them is published.
 const projects = defineCollection({
   loader: glob({
     pattern: '*/index.md',
@@ -25,8 +26,6 @@ const projects = defineCollection({
       context: z.array(z.string()).default([]),
       related: z.array(z.string()).default([]),
       cover: image(),
-      // Archived projects stay in the repo but are left off the site.
-      archived: z.boolean().default(false),
     }),
 });
 

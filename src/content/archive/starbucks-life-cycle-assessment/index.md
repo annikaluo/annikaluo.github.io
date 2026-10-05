@@ -9,7 +9,6 @@ note: "Why are paper cups unrecyclable?"
 related:
   - faux-fur-assessment
 cover: ./cover.jpg
-archived: true
 ---
 ![Starbucks Paper Cups: Life Cycle Assessment, image 1](./01.jpg)
 

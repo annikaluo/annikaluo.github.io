@@ -8,7 +8,6 @@ note: "Is faux fur an eco-friendly alternative?"
 related:
   - starbucks-life-cycle-assessment
 cover: ./cover.jpg
-archived: true
 ---
 ![Faux Fur Assessment, image 1](./01.jpg)
 
