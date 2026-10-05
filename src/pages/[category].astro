@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Threads from '../components/Threads.astro';
+import { categories } from '../site';
+import { getProjects } from '../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return categories.map((category) => ({
+    params: { category: category.id },
+    props: { category, projects: projects.filter((p) => p.data.category === category.id) },
+  }));
+}
+
+const { category, projects } = Astro.props;
+---
+
+<Base title={category.label} description={`${category.label} work by Annika Luo.`}>
+  <div class="sheet">
+    <h1 class="row"><span class="key">{category.letter}</span>{category.label}</h1>
+    <div class="hung">
+      <Threads at={[0]} />
+      <ul class="covers">
+        {
+          projects.map((p, i) => (
+            <li>
+              <a href={`/work/${p.id}/`}>
+                <Image
+                  src={p.data.cover}
+                  alt=""
+                  widths={[480, 800, 1200]}
+                  sizes="(min-width: 48rem) 45vw, 92vw"
+                  loading={i < 2 ? 'eager' : 'lazy'}
+                />
+                <span class="line">
+                  <span class="mark">{p.data.title}</span> <i>{p.data.note}</i>{' '}
+                  <span class="plain">{p.data.year}</span>
+                </span>
+                {p.data.summary && <span class="summary">{p.data.summary}</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="row" aria-hidden="true"><span class="key">{category.letter}</span></div>
+  </div>
+</Base>

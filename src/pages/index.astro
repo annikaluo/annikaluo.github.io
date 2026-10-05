@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Threads from '../components/Threads.astro';
+import { categories, levelOf } from '../site';
+import { byYear, getProjects, range } from '../lib/projects';
+
+const projects = await getProjects();
+const years = byYear(projects);
+const all = range(categories.length);
+const span = `${projects.at(-1)!.data.year}–${projects[0].data.year}`;
+---
+
+<Base current="index">
+  <h1 class="subtitle">Portfolio {span}</h1>
+
+  <nav class="legend" aria-label="Disciplines">
+    {
+      categories.map((c, i) => (
+        <a class="row" style={`--level:${i}`} href={`/${c.id}/`}>
+          <Threads at={range(i)} />
+          <span class="mark">
+            <span class="key">{c.letter}</span>
+            {c.label}
+          </span>
+        </a>
+      ))
+    }
+    <div class="tail"><Threads at={all} /></div>
+  </nav>
+
+  <div class="index">
+    {
+      years.map(([year, items], y) => (
+        <section>
+          <h2 class="head">{year}</h2>
+          <ul>
+            {items.map((p) => {
+              const level = levelOf(p.data.category);
+              return (
+                <li class="row" style={`--level:${level}`}>
+                  <Threads at={range(level)} />
+                  <a href={`/work/${p.id}/`}>
+                    <span class="mark">{p.data.title}</span>
+                    <i>{p.data.note}</i>
+                    <Image class="peek" src={p.data.cover} alt="" width={760} />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          {y < years.length - 1 ? (
+            <div class="tail">
+              <Threads at={all} />
+            </div>
+          ) : (
+            <div aria-hidden="true">
+              <div class="tail short">
+                <Threads at={all} />
+              </div>
+              {categories.map((c, i) => (
+                <div class="row" style={`--level:${i}`}>
+                  <Threads at={all.filter((k) => k > i)} />
+                  <span class="key">{c.letter}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</Base>

@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Threads from '../../components/Threads.astro';
+import { categories } from '../../site';
+import { getProjects } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: projects[i - 1],
+      next: projects[i + 1],
+      related: projects.filter((p) => project.data.related.includes(p.id)),
+    },
+  }));
+}
+
+const { project, prev, next, related } = Astro.props;
+const { data } = project;
+const category = categories.find((c) => c.id === data.category)!;
+const { Content } = await render(project);
+const fullTitle = data.subtitle ? `${data.title}: ${data.subtitle}` : data.title;
+---
+
+<Base title={fullTitle} description={data.summary ?? `${fullTitle}. ${data.note}.`} image={data.cover.src}>
+  <article class="sheet">
+    <a class="row" href={`/${category.id}/`}>
+      <span class="mark"><span class="key">{category.letter}</span>{category.label}</span>
+    </a>
+    <div class="hung">
+      <Threads at={[0]} />
+      <h1>{data.title}{data.subtitle && <i> {data.subtitle}</i>}</h1>
+      <ul class="context">
+        <li>{data.date}</li>
+        {data.context.map((line) => <li>{line}</li>)}
+      </ul>
+      {data.summary && <p class="lede">{data.summary}</p>}
+      <div class="prose"><Content /></div>
+      {
+        related.length > 0 && (
+          <ul class="related caps">
+            {related.map((p) => (
+              <li>
+                <a href={`/work/${p.id}/`}>
+                  See also <span class="mark">{p.data.title}</span> <i>{p.data.note}</i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    <div class="row" aria-hidden="true"><span class="key">{category.letter}</span></div>
+  </article>
+
+  <nav class="pager" aria-label="More work">
+    {
+      prev && (
+        <a href={`/work/${prev.id}/`}>
+          <span class="key">Previous</span>
+          <span class="mark">{prev.data.title}</span> <i>{prev.data.note}</i>
+        </a>
+      )
+    }
+    {
+      next && (
+        <a href={`/work/${next.id}/`}>
+          <span class="key">Next</span>
+          <span class="mark">{next.data.title}</span> <i>{next.data.note}</i>
+        </a>
+      )
+    }
+  </nav>
+</Base>

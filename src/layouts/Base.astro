@@ -1,0 +1,55 @@
+---
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '@fontsource-variable/hanken-grotesk/wght-italic.css';
+import '../styles/global.css';
+import fontUrl from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
+import { site } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  current?: 'index' | 'about';
+}
+const { title, description = site.description, image, current } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name} | Portfolio`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+      <a class="name" href="/">{site.name}</a>
+      <nav aria-label="Site">
+        <a href="/" aria-current={current === 'index' ? 'page' : undefined}>Index</a>
+        <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="colophon">
+      <a href={`mailto:${site.email}`}>Email</a>
+      <a href={site.linkedin} rel="me noopener">LinkedIn</a>
+      <a href={site.instagram} rel="me noopener">Instagram</a>
+      <span>© {new Date().getFullYear()} {site.name}</span>
+    </footer>
+  </body>
+</html>

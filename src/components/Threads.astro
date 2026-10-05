@@ -1,0 +1,10 @@
+---
+// Vertical hairlines at the given tab stops. Rows stack with no gaps, so the
+// segments join into continuous lines running down a section.
+interface Props {
+  at: number[];
+}
+const { at } = Astro.props;
+---
+
+{at.map((i) => <span class="thread" style={`--i:${i}`} aria-hidden="true" />)}

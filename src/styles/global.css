@@ -1,0 +1,429 @@
+/*
+  The whole site is set like a typed index: one typeface, two sizes, no bold.
+  Structure comes from tab stops and from hairlines ("threads") that hang off
+  each discipline and run down the page.
+*/
+
+:root {
+  --ink: #000;
+  --paper: #fff;
+  --font: 'Hanken Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --tab: clamp(1.15rem, 2.4vw, 1.65rem);
+  --gutter: clamp(1.1rem, 5vw, 4rem);
+  --base: var(--tab); /* where thread A sits, measured from the gutter */
+  --text: 0.9375rem;
+  --title: 1.3125rem;
+  --track: 0.06em;
+  color-scheme: light;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --base: calc(var(--tab) * 2);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 var(--gutter);
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--text) / 1.55 var(--font);
+  font-kerning: normal;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Capitals are the site's only emphasis, always tracked out a little. */
+.caps,
+.masthead,
+.colophon,
+.head,
+.row,
+.sheet h1,
+.prose h2,
+.pager {
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+}
+
+i,
+em,
+.plain {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.plain {
+  font-style: normal;
+}
+
+/* Links read as links by inverting, like a strip of correction tape in negative. */
+.mark {
+  padding: 0.08em 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+a:hover .mark,
+a:focus-visible .mark,
+.masthead a:hover,
+.colophon a:hover,
+.prose a:hover {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0.3em 0 0 var(--ink), -0.3em 0 0 var(--ink);
+}
+
+.skip {
+  position: absolute;
+  left: -999rem;
+}
+
+.skip:focus {
+  left: var(--gutter);
+  top: 0.5rem;
+  background: var(--paper);
+  z-index: 2;
+}
+
+/* ---- masthead and colophon ------------------------------------------- */
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-top: clamp(1.4rem, 4vw, 2.75rem);
+}
+
+.masthead .name {
+  font-size: var(--title);
+  line-height: 1.2;
+}
+
+.masthead nav {
+  display: flex;
+  gap: 1.4em;
+}
+
+.masthead nav a[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+}
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1.6em;
+  padding-block: clamp(3rem, 9vw, 5.5rem) clamp(1.5rem, 4vw, 2.75rem);
+}
+
+.colophon span {
+  margin-left: auto;
+}
+
+/* ---- rows and threads ------------------------------------------------ */
+
+.head {
+  padding-top: clamp(2rem, 5vw, 3.25rem);
+  padding-bottom: 1.5em;
+}
+
+.row {
+  position: relative;
+  display: block;
+  padding: 0.14em 0 0.14em calc(var(--base) + var(--level, 0) * var(--tab));
+}
+
+.thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--base) + var(--i) * var(--tab) + 0.26em);
+  width: 1px;
+  background: var(--ink);
+}
+
+.tail {
+  position: relative;
+  height: 3.4em;
+}
+
+.tail.short {
+  height: 1.7em;
+}
+
+.key {
+  display: inline-block;
+  min-width: 1.35em;
+}
+
+/* ---- home: the index ------------------------------------------------- */
+
+.subtitle {
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+}
+
+.legend {
+  padding-top: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+.index .row a {
+  display: inline;
+}
+
+.index .row i {
+  margin-left: 0.35em;
+}
+
+/* Hovering an entry pins its cover to the right edge. Pointer devices only;
+   the images are lazy and hidden, so phones never download them. */
+.peek {
+  display: none;
+}
+
+@media (hover: hover) and (min-width: 62rem) {
+  .index a:hover .peek,
+  .index a:focus-visible .peek {
+    display: block;
+    position: fixed;
+    right: var(--gutter);
+    top: 50%;
+    translate: 0 -50%;
+    width: auto;
+    height: auto;
+    max-width: min(38vw, 34rem);
+    max-height: 78vh;
+    pointer-events: none;
+  }
+}
+
+/* ---- category and project sheets ------------------------------------- */
+
+.sheet {
+  --base: 0rem;
+  padding-top: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+.sheet .hung {
+  position: relative;
+  padding: 1.6em 0 2.2em var(--tab);
+}
+
+.sheet .hung > .thread {
+  --i: 0;
+}
+
+.sheet h1 {
+  font-size: var(--title);
+  line-height: 1.25;
+  max-width: 34rem;
+}
+
+.context {
+  padding-top: 0.5em;
+}
+
+.lede {
+  padding-top: 1.4em;
+  max-width: 36rem;
+}
+
+/* Project body, written in Markdown. */
+.prose {
+  padding-top: clamp(1.75rem, 4vw, 2.75rem);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.prose > * {
+  max-width: 36rem;
+}
+
+.prose > * + * {
+  margin-top: 1.05em;
+}
+
+.prose h2 {
+  font-size: var(--text);
+  margin-top: 3em;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+/* A paragraph holding images is a figure: one image stands alone, several
+   written on consecutive lines become a grid. */
+.prose > p:has(> img) {
+  max-width: 64rem;
+  margin-top: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.prose > p:has(> img) + :not(p:has(> img)) {
+  margin-top: 2.2em;
+}
+
+.prose > :not(p:has(> img)) + p:has(> img) {
+  margin-top: 2.2em;
+}
+
+.prose img {
+  width: auto;
+  max-height: 92svh;
+}
+
+.prose > p:has(> img ~ img) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  align-items: start;
+}
+
+.prose > p:has(> img ~ img) img {
+  width: 100%;
+  max-height: none;
+}
+
+@media (min-width: 48rem) {
+  .prose > p:has(> img:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.related {
+  padding-top: 3em;
+}
+
+/* Category page: covers with their index line underneath. */
+.covers {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2.5rem);
+  padding-top: 0.6em;
+  max-width: 68rem;
+}
+
+@media (min-width: 48rem) {
+  .covers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.covers a {
+  display: block;
+}
+
+.covers {
+  align-items: end;
+}
+
+.covers img {
+  width: auto;
+  max-height: 70svh;
+}
+
+.covers .line {
+  display: block;
+  padding-top: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+}
+
+.covers .summary {
+  display: block;
+  max-width: 30rem;
+}
+
+.pager {
+  display: grid;
+  gap: 0.3em;
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.pager .key {
+  min-width: 6.2em;
+}
+
+/* About */
+.about {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  max-width: 68rem;
+}
+
+@media (min-width: 56rem) {
+  .about {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+    align-items: start;
+  }
+}
+
+.about .prose {
+  padding-top: 1.2em;
+}
+
+.contact {
+  padding-top: 2.5em;
+}
+
+/* Moving between pages cross-fades where the browser supports it. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}

@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import portrait from '../assets/about.jpg';
+import { site } from '../site';
+---
+
+<Base title="About" current="about">
+  <div class="sheet about">
+    <Image
+      src={portrait}
+      alt="Annika Luo"
+      widths={[480, 800, 1200, 1600]}
+      sizes="(min-width: 56rem) 52vw, 92vw"
+      loading="eager"
+    />
+    <div>
+      <h1>About</h1>
+      <div class="prose">
+        <p>
+          Annika is a fashion designer with five years of theater production and project management experience, who is
+          currently pursuing a BFA degree in fashion design at Parsons School of Design. She is a firm believer in the
+          power of design and strategy. She creates at the intersection of fashion, sustainability, and business to
+          deliver consumer-centric one-of-a-kind pieces for the modern-day problem-solvers and change-makers. Her
+          curiosity drives her to dive deep into the complexity of the fashion world to find the root cause of the most
+          pressing environmental and social issues.
+        </p>
+        <p>In her spare time, Annika is an amateur bodybuilder, coffee addict, and theater lover!</p>
+      </div>
+      <ul class="contact caps">
+        <li><a href={`mailto:${site.email}`}><span class="mark">Email</span> <i>{site.email}</i></a></li>
+        <li><a href={site.linkedin} rel="me noopener"><span class="mark">LinkedIn</span> <i>annikaluo</i></a></li>
+        <li><a href={site.instagram} rel="me noopener"><span class="mark">Instagram</span> <i>annika.luo</i></a></li>
+      </ul>
+    </div>
+  </div>
+</Base>
