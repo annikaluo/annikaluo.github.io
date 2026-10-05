@@ -12,8 +12,6 @@ related:
   - from-waste-to-wear
 cover: ./cover.jpg
 ---
-Examining the fashion industry’s environmental impact reveals a complex system far beyond the glamour of the runway stage. It unveils the traces of the cotton and indigo trade, the evidence of labor exploitation, and the waste crisis of the capitalist world system.
-
 Embracing a systematic approach to her design process, Annika Luo’s collection is driven by sartorial (the Latin noun *sartor*, meaning "tailor" – literally, "one who patches or mends") traditions with materiality. She has pledged to forgo virgin textiles, focusing instead on reclaiming and repurposing waste materials to minimize environmental impact.
 
 She uses minimalist concepts and detailed workwear silhouettes, while irregular scrap waste textiles are redefined through precise tailoring and immaculate finishing. By making it entirely from waste material, she aims to inspire others to rethink the excessive waste in garment production. Her use of materiality combined with the utility of workwear becomes products made for creatives, makers, and workers.
