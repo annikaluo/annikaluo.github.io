@@ -5,7 +5,7 @@ export type Project = CollectionEntry<'projects'>;
 
 /** Index order: newest year first; inside a year, by thread (A, B, C), then by month. */
 export async function getProjects(): Promise<Project[]> {
-  const all = await getCollection('projects');
+  const all = await getCollection('projects', (p) => !p.data.archived);
   return all.sort(
     (a, b) =>
       b.data.year - a.data.year ||

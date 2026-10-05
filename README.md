@@ -27,6 +27,8 @@ italic note shown in the index, and the context lines (size, materials). Below i
 - A blank line between images stacks them full width.
 - Images on consecutive lines, with no blank line between, sit side by side in a grid.
 
+To take a project off the site without deleting it, add `archived: true` to the block at the top of its `index.md`.
+
 Site-wide details (email, links, category names) are in `src/site.ts`. The About text is in `src/pages/about.astro`.
 
 ## Publish

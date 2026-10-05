@@ -25,6 +25,8 @@ const projects = defineCollection({
       context: z.array(z.string()).default([]),
       related: z.array(z.string()).default([]),
       cover: image(),
+      // Archived projects stay in the repo but are left off the site.
+      archived: z.boolean().default(false),
     }),
 });
 
